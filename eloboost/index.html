@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMSPboosting - Boost Your Rank</title>
+  <link rel="icon" type="image/png" href="images/favicon/DMSP.png" />
+</head>
+<body>
+  <video autoplay muted loop playsinline id="background-video">
+    <source src="media/judgement.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">DMSPboosting</a>
+      <ul class="nav-links">
+        <li><a href="pages/soloq.html">SoloQ Boost</a></li>
+        <li><a href="pages/duo-boost.html">DuoQ Boost</a></li>
+        <li><a href="pages/faq.html">FAQ</a></li>
+        <li><a href="https://discord.gg/NMw92tYpCj" target="_blank">Discord</a></li>
+        <li><a href="pages/login.html" class="login-btn">Log in</a></li>
+        </ul>
+    </div>
+  </header>
+
+  <section class="hero-content">
+    <h1>We boost, you chill. GG easy </h1>
+    <p>
+      Thousands already climbed. Now it’s your turn. Fast, safe and lowkey boosting to your dream rank – no stress, just wins.
+    </p>
+    <a href="pages/soloq.html"><button class="cta-button">Order</button></a>
+  </section>
+
+  <section class="performance-wrapper" id="performance">
+    <div class="performance-section container">
+      <div class="gallery">
+        <img src="images/orders/d4-d2.jpg" class="gallery-img active" />
+        <img src="images/orders/duo-s4-p4.png" class="gallery-img" />
+        <img src="images/orders/booster.jpg" class="gallery-img" />
+        <div class="gallery-nav">
+          <button class="gallery-btn active" data-index="0">1</button>
+          <button class="gallery-btn" data-index="1">2</button>
+          <button class="gallery-btn" data-index="2">3</button>
+        </div>
+      </div>
+      <div class="description-box">
+        <div class="desc active">Diamond IV to Diamond II SOLOQ, Full winrate run.</div>
+        <div class="desc">Silver IV to Platinum IV DUOQ, finished with 40w 2l wr.</div>
+        <div class="desc">Latest SOLOQ account from one of our boosters.</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Zoomed Screenshot" />
+  </div>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 21, 0.6);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+      width: 100%;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 15, 21, 0.6);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #8b5cf6;
+      text-decoration: none;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .logo:hover {
+      color: #a278f9;
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #8b5cf6;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      z-index: 2;
+      position: relative;
+      padding-top: 100px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease forwards;
+      animation-delay: 0.2s;
+      background: linear-gradient(90deg, #fff, #8b5cf6, #fff);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      color: #d1d1d1;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .cta-button {
+      background-color: #8b5cf6;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #a278f9;
+    }
+
+    .performance-wrapper {
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      margin: 100px auto;
+      padding: 60px 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .performance-wrapper.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .performance-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      align-items: stretch;
+      padding: 0 30px;
+    }
+
+    .gallery, .description-box {
+      flex: 1 1 400px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .gallery:hover, .description-box:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: scale(1.01);
+    }
+
+    .gallery-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .gallery-img.active {
+      display: block;
+    }
+
+    .gallery-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .gallery-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-btn.active,
+    .gallery-btn:hover {
+      background: #8b5cf6;
+      transform: scale(1.05);
+    }
+
+    .description-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #f2f2f2;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .desc {
+      display: none;
+    }
+
+    .desc.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  
+.login-btn {
+  background-color: #8b5cf6;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.login-btn:hover {
+  background-color: #a278f9;
+}
+
+</style>
+
+  <script>
+    const galleryButtons = document.querySelectorAll('.gallery-btn');
+    const galleryImages = document.querySelectorAll('.gallery-img');
+    const descriptions = document.querySelectorAll('.desc');
+
+    galleryButtons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.gallery-btn.active')?.classList.remove('active');
+        document.querySelector('.gallery-img.active')?.classList.remove('active');
+        document.querySelector('.desc.active')?.classList.remove('active');
+        btn.classList.add('active');
+        galleryImages[i].classList.add('active');
+        descriptions[i].classList.add('active');
+      });
+    });
+
+    const galleryImgs = document.querySelectorAll('.gallery-img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    galleryImgs.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+      });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+
+    // IntersectionObserver for scroll animation
+    const perfSection = document.getElementById('performance');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          perfSection.classList.add('show');
+          observer.unobserve(perfSection);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    if (perfSection) observer.observe(perfSection);
+  </script>
+</body>
+</html>
