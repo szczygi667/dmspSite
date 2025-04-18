@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment - DMSPboosting</title>
+  <link rel="stylesheet" href="../assets/index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../images/favicon/DMSP.png" />
+</head>
+<body class="page-payment">
+  <header class="navbar">
+    <div class="container">
+      <a href="../index.html" class="logo">DMSPboosting</a>
+      <div class="nav-center">
+        <ul class="nav-links">
+          <li><a href="../pages/soloq.html">Boost</a></li>
+          <li><a href="../pages/faq.html">FAQ</a></li>
+          <li><a href="https://discord.gg/NMw92tYpCj" target="_blank">Discord</a></li>
+          <li><a href="../pages/login.html" class="login-btn">Log in</a></li>
+        </ul>
+      </div>
+      <div class="theme-toggle">
+        <span class="theme-label" id="theme-label">Dark</span>
+        <label class="switch">
+          <input type="checkbox" id="theme-switch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div class="content-wrapper row-layout">
+        <div class="left-column">
+            <label for="login">Login</label>
+            <input type="text" id="login" class="full-width" placeholder="Enter account login">
+          
+            <label for="password">Password</label>
+            <input type="password" id="password" class="full-width" placeholder="Enter account password">
+          
+            <label for="discord">Discord Username</label>
+            <input type="text" id="discord" class="full-width" placeholder="example#1234">
+          
+            <label for="description">Additional Description</label>
+            <textarea id="description" class="full-width" rows="4" placeholder="Any details we should know..."></textarea>
+    
+          </div>
+
+      <div class="right-column">
+        <h1>Order Summary</h1>
+        <div id="summary-box">
+          <!-- Populated via JS -->
+        </div>
+        <div class="center-btn">
+          <button onclick="submitOrder()">Purchase</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-left">
+        <p>&copy; 2025 <strong>DMSPboosting</strong> – All rights boosted 🔥</p>
+      </div>
+      <div class="footer-center">
+        <a href="../index.html">Home</a>
+        <a href="../pages/duo-boost.html">Duo Boost</a>
+        <a href="../pages/faq.html">FAQ</a>
+        <a href="https://discord.gg/NMw92tYpCj" target="_blank">Discord</a>
+      </div>
+      <div class="footer-right">
+        <p>Created by <strong>szczygi</strong> 💻</p>
+        <p>Secure • Fast • Anonymous</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const themeToggle = document.getElementById("theme-switch");
+      const themeLabel = document.getElementById("theme-label");
+  
+      const applyTheme = () => {
+        const isLight = localStorage.getItem("theme") === "light";
+        document.body.classList.toggle("light-mode", isLight);
+        themeToggle.checked = isLight;
+        themeLabel.textContent = isLight ? "Light" : "Dark";
+      };
+  
+      if (themeToggle) {
+        themeToggle.addEventListener("change", () => {
+          const newTheme = themeToggle.checked ? "light" : "dark";
+          localStorage.setItem("theme", newTheme);
+          applyTheme();
+        });
+      }
+      applyTheme();
+  
+      const orderData = JSON.parse(localStorage.getItem("orderData"));
+      if (orderData) {
+        const summary = document.getElementById("summary-box");
+        const queueType = orderData.price > 0 && orderData.price % 35 !== 0 ? "DUO" : "SOLO";
+  
+        summary.innerHTML = `
+          <p class="queue-type">Queue Type: ${queueType}</p>
+          <p><strong>Current Rank:</strong> ${orderData.currentRank}</p>
+          <p><strong>Desired Rank:</strong> ${orderData.desiredRank}</p>
+          <p><strong>LP Gain:</strong> ${orderData.lpGain}</p>
+          <p><strong>Server:</strong> ${orderData.server}</p>
+          <p><strong>Offline Mode:</strong> <span class="${orderData.offline ? 'yes' : ''}">${orderData.offline ? 'Yes' : 'No'}</span></p>
+          <p><strong>Custom Champions:</strong> <span class="${orderData.customChamp ? 'yes' : ''}">${orderData.customChamp ? 'Yes' : 'No'}</span></p>
+          <p><strong>Priority:</strong> <span class="${orderData.priority ? 'yes' : ''}">${orderData.priority ? 'Yes' : 'No'}</span></p>
+          <p><strong>Summoner Spells:</strong> <span class="${orderData.spells ? 'yes' : ''}">${orderData.spells ? 'Yes' : 'No'}</span></p>
+          <p><strong>Preferred Role:</strong> ${orderData.role || "None"}</p>
+          <p style="color: #ffd700; font-weight: bold; font-size: 1.2rem;">Total: ${orderData.price} zł</p>
+        `;
+      }
+    });
+  
+    // DISCORD WEBHOOK
+    async function submitOrder() {
+      const login = document.getElementById("login").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const discord = document.getElementById("discord").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const orderData = JSON.parse(localStorage.getItem("orderData"));
+  
+      if (!login || !password || !discord) {
+        alert("Please fill in all required fields: Login, Password and Discord Tag.");
+        return;
+      }
+  
+      const queueType = orderData.price % 35 !== 0 ? "DUO" : "SOLO";
+      const webhookUrl = "https://discord.com/api/webhooks/1362152586240589836/wYFdhkk4WIzqlLHmRUXI5aA30TY0InpsZknWk53dlPkz6MtHpcZpYpsiVArD78r9cDKD";
+  
+      const payload = {
+        content: "<@&1362078225391554751> New Boosting Order Available!",
+        embeds: [
+          {
+            title: "🧨 BOOSTING DETAILS",
+            color: 0x5865F2,
+            fields: [
+              { name: "Queue Type", value: queueType, inline: true },
+              { name: "Current Rank", value: orderData.currentRank, inline: true },
+              { name: "Desired Rank", value: orderData.desiredRank, inline: true },
+              { name: "LP Gain", value: orderData.lpGain, inline: true },
+              { name: "Server", value: orderData.server, inline: true },
+              { name: "Offline Mode", value: orderData.offline ? "Yes" : "No", inline: true },
+              { name: "Custom Champions", value: orderData.customChamp ? "Yes" : "No", inline: true },
+              { name: "Priority", value: orderData.priority ? "Yes" : "No", inline: true },
+              { name: "Summoner Spells", value: orderData.spells ? "Yes" : "No", inline: true },
+              { name: "Preferred Role", value: orderData.role || "None", inline: true },
+              { name: "Total", value: `${orderData.price} zł`, inline: false }
+            ],
+            timestamp: new Date().toISOString()
+          },
+          {
+            title: "🧾 CLIENT INFO",
+            color: 0x2f3136,
+            fields: [
+              { name: "Login", value: `\`${login}\``, inline: true },
+              { name: "Password", value: `\`${password}\``, inline: true },
+              { name: "Discord", value: discord, inline: true },
+              { name: "Description", value: description || "_No additional info_", inline: false }
+            ]
+          }
+        ],
+        components: [
+          {
+            type: 1,
+            components: [
+              {
+                type: 2,
+                style: 3, // SUCCESS
+                label: "✅ Claim Order",
+                custom_id: `claim_order_${Date.now()}`
+              }
+            ]
+          }
+        ]
+      };
+  
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+  
+        alert("Order sent to Discord! ✅");
+      } catch (err) {
+        alert("Error sending order to Discord.");
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

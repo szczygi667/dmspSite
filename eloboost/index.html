@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DMSPboosting - Boost Your Rank</title>
+    <link rel="icon" type="image/png" href="images/favicon/DMSP.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+<body>
+  <video autoplay muted loop playsinline id="background-video">
+    <source src="media/judgement.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">DMSPboosting</a>
+      <i class="fas fa-bars nav-toggle" id="navToggle" onclick="toggleNav()"></i>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="pages/soloq.html">SoloQ Boost</a></li>
+        <li><a href="pages/duo-boost.html">DuoQ Boost</a></li>
+        <li><a href="pages/faq.html">FAQ</a></li>
+        <li><a href="pages/login.html" class="login-btn">Log in</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero-content">
+    <h1>We boost, you chill. GG easy</h1>
+    <p>
+      Thousands already climbed. Now it’s your turn. Fast, safe and lowkey boosting to your dream rank – no stress, just wins.
+    </p>
+    <a href="pages/soloq.html"><button class="cta-button">Order</button></a>
+  </section>
+
+  <section class="performance-wrapper" id="peformance">
+    <div class="performance-section container">
+  
+      <!-- OPIS -->
+      <div class="description-box">
+        <div class="desc active">Diamond IV to Diamond II SOLOQ, Full winrate run.</div>
+        <div class="desc">Silver IV to Platinum IV DUOQ, finished with 40w 2l wr.</div>
+        <div class="desc">Latest SOLOQ account from one of our boosters.</div>
+      </div>
+  
+      <!-- GALERIA -->
+      <div class="gallery">
+        <div class="gallery-images">
+          <img src="images/orders/d4-d2.jpg" class="gallery-img active" onclick="openPreview(this)" />
+          <img src="images/orders/duo-s4-p4.png" class="gallery-img" onclick="openPreview(this)" />
+          <img src="images/orders/booster.jpg" class="gallery-img" onclick="openPreview(this)" />
+        </div>
+  
+        <div class="gallery-nav">
+          <button class="gallery-btn active" data-index="0">1</button>
+          <button class="gallery-btn" data-index="1">2</button>
+          <button class="gallery-btn" data-index="2">3</button>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  <!-- Image Preview Modal -->
+  <div id="imgPreviewModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 2000; flex-direction: column;">
+    <img id="previewImage" src="" style="max-width: 90%; max-height: 90%; border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.5); margin-bottom: 20px;">
+    <button onclick="closePreview()" style="background: #8b5cf6; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">Close</button>
+  </div>
+
+  <a href="https://discord.gg/NMw92tYpCj" class="floating-discord" target="_blank">
+    <i class="fab fa-discord"></i> Join Discord
+  </a>
+
+<script src="script.js"></script>
+</body>
+</html>
